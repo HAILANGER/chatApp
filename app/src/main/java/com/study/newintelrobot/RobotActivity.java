@@ -34,12 +34,6 @@ public class RobotActivity extends AppCompatActivity {
     private List<ChatBean> chatBeanList; //存放所有聊天数据的集合
     private EditText et_send_msg;
     private Button btn_send;
-    //接口地址
-    private static final String WEB_SITE1 = "http://www.tuling123.com/openapi/api";
-    private static final String WEB_SITE = "https://api.openai.com/v1/engines/davinci-codex/completions";
-    //唯一key，该key的值是从官网注册账号后获取的，注册地址：http://www.tuling123.com/
-    private static final String KEY1 = "3e7ac6cff6b64a7d939d09a6d6c29642";
-    private static final String KEY = "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";
     private String sendMsg;    //发送的信息
     private String welcome[];  //存储欢迎信息
     private MHandler mHandler;
@@ -209,9 +203,7 @@ public class RobotActivity extends AppCompatActivity {
             JSONArray array = new JSONArray(content);
             JSONObject object = new JSONObject(array.get(0).toString());
             content = object.getString("text");
-//            int code = obj.getInt("code");            //服务器状态码
-            int code = 2000;
-            updateView(code, content);                 //更新界面
+            updateView(content);                 //更新界面
         } catch (JSONException e) {
             e.printStackTrace();
             showData("主人，你的网络不好哦");
@@ -230,25 +222,8 @@ public class RobotActivity extends AppCompatActivity {
         adpter.notifyDataSetChanged();
     }
 
-    private void updateView(int code, String content) {
-        //code有很多种状，在此只例举几种，如果想了解更多，请参考官网http://www.tuling123.com
-        switch (code) {
-            case 4004:
-                showData("主人，今天我累了，我要休息了，明天再来找我耍吧");
-                break;
-            case 40005:
-                showData("主人，你说的是外星语吗？");
-                break;
-            case 40006:
-                showData("主人，我今天要去约会哦，暂不接客啦");
-                break;
-            case 40007:
-                showData("主人，明天再和你耍啦，我生病了，呜呜......");
-                break;
-            default:
-                showData(content);
-                break;
-        }
+    private void updateView(String content) {
+        showData(content);
     }
 
     protected long exitTime;//记录第一次点击时的时间
