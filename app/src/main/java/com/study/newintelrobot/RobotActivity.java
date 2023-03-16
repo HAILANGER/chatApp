@@ -43,10 +43,10 @@ public class RobotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robot);
-        View decorView = getWindow().getDecorView();
-        // Hide the status bar.
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+//        View decorView = getWindow().getDecorView();
+//        // Hide the status bar.
+//        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        decorView.setSystemUiVisibility(uiOptions);
 
         chatBeanList = new ArrayList<ChatBean>();
         mHandler = new MHandler();
@@ -99,6 +99,7 @@ public class RobotActivity extends AppCompatActivity {
     }
 
     private void getDataFromServer() {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -110,7 +111,7 @@ public class RobotActivity extends AppCompatActivity {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setRequestProperty("Content-Type", "application/json");
-                    connection.setRequestProperty("Authorization", "Bearer YOUT_API_KEY");
+                    connection.setRequestProperty("Authorization", "Bearer YOU_API_KEY");
 
                     // Create a JSON object with the request data
                     JSONObject requestData = new JSONObject();
